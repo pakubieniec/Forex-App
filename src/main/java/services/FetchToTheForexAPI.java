@@ -16,7 +16,6 @@ public class FetchToTheForexAPI {
                 .uri(URI.create("http://api.exchangeratesapi.io/v1/latest?access_key=" + API_KEY + "&symbols=PLN"))
                 .GET()
                 .build();
-//        System.out.println(request);
         return getResponds(request);
     }
 
@@ -25,28 +24,13 @@ public class FetchToTheForexAPI {
                 .uri(URI.create("http://api.exchangeratesapi.io/v1/" + date + "?access_key=" + API_KEY + "&symbols=PLN"))
                 .GET()
                 .build();
-//        System.out.println(request);
         return getResponds(request);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FetchToTheForexAPI that)) return false;
-        return Objects.equals(API_KEY, that.API_KEY) && Objects.equals(CLIENT, that.CLIENT);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(API_KEY, CLIENT);
     }
 
     private String getResponds(HttpRequest request) {
         HttpResponse<String> response;
         try {
             response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-//            System.out.println(response);
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
