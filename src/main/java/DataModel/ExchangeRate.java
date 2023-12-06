@@ -1,9 +1,20 @@
 package DataModel;
 
+import java.util.Objects;
+
 public class ExchangeRate {
     private String ticker;
     private double exchangeAmount;
     private double rate = 4.2;
+
+    public ExchangeRate(){
+
+    }
+    public ExchangeRate(String ticker, double exchangeAmount, double rate) {
+        this.ticker = ticker;
+        this.exchangeAmount = exchangeAmount;
+        this.rate = rate;
+    }
 
     public double getExchangeAmount() {
         return exchangeAmount;
@@ -30,8 +41,13 @@ public class ExchangeRate {
     }
 
     public double convertedCurrency(double exchangeAmount) {
-        double result = roundTo2DecimalPlace(exchangeAmount * rate);
-        return result;
+        if (exchangeAmount <= 0) {
+            System.out.println("You have entered an incorrect amount. The amount cannot be negative or zero.");
+            return 0;
+        } else {
+            double result = roundTo2DecimalPlace(exchangeAmount * rate); //exchangeAmount
+            return result;
+        }
     }
 
     public static double roundTo2DecimalPlace(double value) {
@@ -45,5 +61,18 @@ public class ExchangeRate {
                 ", exchangeAmount=" + exchangeAmount +
                 ", rate=" + rate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExchangeRate that = (ExchangeRate) o;
+        return Double.compare(exchangeAmount, that.exchangeAmount) == 0 && Double.compare(rate, that.rate) == 0 && Objects.equals(ticker, that.ticker);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ticker, exchangeAmount, rate);
     }
 }

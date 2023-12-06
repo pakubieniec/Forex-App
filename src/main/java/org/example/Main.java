@@ -44,26 +44,9 @@ public class Main {
         exchangeRateInfo.writeValueCurrencyExchangeToList();
         exchangeRateInfo.writeValueCurrencyExchangeToList(date);
 
-
-        exchangeRateInfo.getListDataFromForexApi();
         System.out.println(exchangeRateInfo.getListDataFromForexApi());
         System.out.println("--------------------------");
-        exchangeRate.convertedCurrency(100);
-
-        System.out.println("-----TEST ExchangeRateInfoMapper");
-        exchangeRateInfoDTO.setDate("2015-01-01");
-        exchangeRateInfo.writeValueCurrencyExchangeToList("2015-01-01");
-        exchangeRateInfo.writeValueCurrencyExchangeToList("2015-05-19");
-        exchangeRateInfoDTO.getListDataFromForexApi();
-        System.out.println(ExchangeRateInfoMapper.exchangeRateInfoDTOToExchangeRateInfo(exchangeRateInfoDTO));
-
-        System.out.println("-----TEST ExchangeRateMapper");
-        exchangeRateDTO.setTicker("CAN");
-        exchangeRateDTO.setExchangeAmount(100);
-        exchangeRateDTO.setRate(3.8);
-        exchangeRateDTO.convertedCurrency(20);
-        System.out.println(ExchangeRateMapper.exchangeRateDTOToExchangeRate(exchangeRateDTO));
-        System.out.println(exchangeRateDTO.convertedCurrency(20));
+        System.out.println(exchangeRate.convertedCurrency(100));
 
     }
 }

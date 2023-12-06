@@ -9,7 +9,6 @@ public final class ExchangeRateMapper {
         exchangeRate.setTicker(exchangeRateDTO.getTicker());
         exchangeRate.setExchangeAmount(exchangeRateDTO.getExchangeAmount());
         exchangeRate.setRate(exchangeRateDTO.getRate());
-        exchangeRate.convertedCurrency(exchangeRateDTO.convertedCurrency(exchangeRateDTO.getExchangeAmount()));
         return exchangeRate;
     }
 }
