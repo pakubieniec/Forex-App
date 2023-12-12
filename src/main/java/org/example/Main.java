@@ -6,6 +6,7 @@ import DataModel.ExchangeRateInfo;
 import DataModel.ExchangeRateInfoDTO;
 import Mappers.ExchangeRateInfoMapper;
 import Mappers.ExchangeRateMapper;
+import Mappers.JSONMapper;
 import services.FetchToTheForexAPI;
 
 import java.text.DateFormat;
@@ -47,6 +48,31 @@ public class Main {
         System.out.println(exchangeRateInfo.getListDataFromForexApi());
         System.out.println("--------------------------");
         System.out.println(exchangeRate.convertedCurrency(100));
-
+        System.out.println("--------------------------");
+        System.out.println("--------------------------");
+        JSONMapper jsonMapper = new JSONMapper();
+        DataFromForexApi dataFromForexApi = new DataFromForexApi();
+        DataFromForexApi dataFromForexApi2 = new DataFromForexApi();
+        String fetchInfo = fetch.getRespondsWithHistoricalDate("2023-01-01");
+        String fetchInfo2 = fetch.getRespondsWithLatestDate();
+        System.out.println(fetchInfo);
+        System.out.println(fetchInfo2);
+        dataFromForexApi = jsonMapper.mapJsonToJava(fetchInfo);
+        dataFromForexApi2 = jsonMapper.mapJsonToJava(fetchInfo2);
+        System.out.println(jsonMapper.mapJsonToJava(fetchInfo));
+        System.out.println(dataFromForexApi.getTimestamp());
+        System.out.println(dataFromForexApi.getDate());
+        System.out.println(dataFromForexApi.isHistorical());
+        System.out.println(dataFromForexApi.getRates());
+        System.out.println(dataFromForexApi.getBase());
+        System.out.println(jsonMapper.mapJsonToJava(fetchInfo2));
+        System.out.println(dataFromForexApi2.getTimestamp());
+        System.out.println(dataFromForexApi2.getDate());
+        System.out.println(dataFromForexApi2.isHistorical());
+        System.out.println(dataFromForexApi2.getRates());
+        System.out.println(dataFromForexApi2.getBase());
+        System.out.println(jsonMapper.mapObjectToJson(dataFromForexApi2));
+        System.out.println(dataFromForexApi2);
+        System.out.println("---------------------");
     }
 }
