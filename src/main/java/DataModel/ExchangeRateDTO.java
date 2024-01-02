@@ -13,7 +13,8 @@ public class ExchangeRateDTO {
     private double exchangeAmount;
     private double rate = 4.2;
 
-    public ExchangeRateDTO(){}
+    public ExchangeRateDTO() {
+    }
 
     public ExchangeRateDTO(String ticker, double exchangeAmount, double rate) {
         this.ticker = ticker;

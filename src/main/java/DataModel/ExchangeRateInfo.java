@@ -2,17 +2,17 @@ package DataModel;
 
 import services.FetchToTheForexAPI;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ExchangeRateInfo {
-    private FetchToTheForexAPI fetch = new FetchToTheForexAPI();
+    private final FetchToTheForexAPI fetch = new FetchToTheForexAPI();
     private final List<String> listDataFromForexApi = new ArrayList<>();
     private String date;
 
-    public ExchangeRateInfo(){}
+    public ExchangeRateInfo() {
+    }
 
     public ExchangeRateInfo(String date) {
         this.date = date;

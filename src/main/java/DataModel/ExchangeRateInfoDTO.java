@@ -11,7 +11,8 @@ public class ExchangeRateInfoDTO {
     private final List<String> listDataFromForexApi = new ArrayList<>();
     private String date;
 
-    public ExchangeRateInfoDTO(){}
+    public ExchangeRateInfoDTO() {
+    }
 
     public ExchangeRateInfoDTO(String date) {
         this.date = date;
