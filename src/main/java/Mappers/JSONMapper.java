@@ -2,7 +2,7 @@ package Mappers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.DataFromForexApi;
+import DataModel.DataFromForexApi;
 
 
 public class JSONMapper {

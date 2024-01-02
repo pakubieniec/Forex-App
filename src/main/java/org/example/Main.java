@@ -1,16 +1,9 @@
 package org.example;
 
-import DataModel.ExchangeRate;
-import DataModel.ExchangeRateDTO;
-import DataModel.ExchangeRateInfo;
-import DataModel.ExchangeRateInfoDTO;
-import Mappers.ExchangeRateInfoMapper;
-import Mappers.ExchangeRateMapper;
+import DataModel.*;
 import Mappers.JSONMapper;
 import services.FetchToTheForexAPI;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 

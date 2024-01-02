@@ -1,13 +1,12 @@
 package services;
 
 import Mappers.JSONMapper;
-import org.example.DataFromForexApi;
+import DataModel.DataFromForexApi;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Objects;
 
 public class FetchToTheForexAPI {
     final String API_KEY = "eef4870f3bb05e362ad7b62b2f593612";
@@ -57,8 +56,7 @@ public class FetchToTheForexAPI {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-        dataFromForexApi = jsonMapper.mapJsonToJava(response.body());
-        return dataFromForexApi;
+        return jsonMapper.mapJsonToJava(response.body());
     }
 }
 

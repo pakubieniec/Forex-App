@@ -1,4 +1,4 @@
-package org.example;
+package DataModel;
 
 import java.util.Objects;
 
@@ -13,53 +13,24 @@ public class DataFromForexApi {
     public DataFromForexApi() {
     }
 
-    public DataFromForexApi(boolean success, int timestamp, boolean historical, String base, String date, Object rates) {
-        this.success = success;
-        this.timestamp = timestamp;
-        this.historical = historical;
-        this.base = base;
-        this.date = date;
-        this.rates = rates;
-    }
-
     public boolean isSuccess() {
         return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     public int getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public boolean isHistorical() {
         return historical;
-    }
-
-    public void setHistorical(boolean historical) {
-        this.historical = historical;
     }
 
     public String getBase() {
         return base;
     }
 
-    public void setBase(String base) {
-        this.base = base;
-    }
-
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public Object getRates() {
