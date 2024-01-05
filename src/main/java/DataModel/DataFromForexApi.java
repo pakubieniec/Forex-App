@@ -1,5 +1,4 @@
 package DataModel;
-
 import java.util.Objects;
 
 public class DataFromForexApi {
