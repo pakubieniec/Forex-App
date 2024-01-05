@@ -58,6 +58,7 @@ public class FetchToTheForexAPI {
         }
         return jsonMapper.mapJsonToJava(response.body());
     }
+
 }
 
 

@@ -1,12 +1,41 @@
 package DataModel;
 
+import Mappers.JSONMapper;
+import services.FetchToTheForexAPI;
+
+import java.util.HashMap;
 import java.util.Objects;
 
 public class ExchangeRate {
     private String ticker;
     private String date;
     private double exchangeAmount;
-    private double rate = 4.2;
+    FetchToTheForexAPI fetch = new FetchToTheForexAPI();
+    DataFromForexApi dataFrom = new DataFromForexApi();
+    JSONMapper mapper = new JSONMapper();
+    private double rate;
+
+    public double getExchangeRateToBeConverted(String date) {
+        setFetchToTheForexApi(date);
+        HashMap maps = (HashMap) dataFrom.getRates();
+        return (double) maps.get("PLN");
+    }
+
+    public double getExchangeRate(String date) {
+        setFetchToTheForexApi(date);
+        HashMap maps = (HashMap) dataFrom.getRates();
+        return roundTo2DecimalPlace((double) maps.get("PLN"));
+    }
+
+    public void setFetchToTheForexApi(String date) {
+        if (Objects.equals(date, null)) {
+            String fetchInfo = fetch.getRespondsWithLatestDate();
+            dataFrom = mapper.mapJsonToJava(fetchInfo);
+        } else {
+            String fetchInfo = fetch.getRespondsWithHistoricalDate(date);
+            dataFrom = mapper.mapJsonToJava(fetchInfo);
+        }
+    }
 
     public ExchangeRate() {
 
@@ -19,6 +48,7 @@ public class ExchangeRate {
     }
 
     public String getDate() {
+
         return date;
     }
 
@@ -47,16 +77,17 @@ public class ExchangeRate {
     }
 
     public void setRate(double rate) {
+
         this.rate = rate;
     }
 
-    public double convertedCurrency(double exchangeAmount) {
+    public double convertedCurrency(double exchangeAmount, String date) {
         if (exchangeAmount <= 0) {
             System.out.println("You have entered an incorrect amount. The amount cannot be negative or zero.");
             return 0;
         } else {
-            double result = roundTo2DecimalPlace(exchangeAmount * rate); //exchangeAmount
-            return result;
+            double result = exchangeAmount * getExchangeRateToBeConverted(date); //exchangeAmount
+            return roundTo2DecimalPlace(result);
         }
     }
 

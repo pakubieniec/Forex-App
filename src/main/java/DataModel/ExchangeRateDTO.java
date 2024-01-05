@@ -1,25 +1,59 @@
 package DataModel;
 
+import Mappers.JSONMapper;
 import services.FetchToTheForexAPI;
 
-import java.sql.SQLOutput;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class ExchangeRateDTO {
     private String ticker;
+    private String date;
     private double exchangeAmount;
-    private double rate = 4.2;
+    FetchToTheForexAPI fetch = new FetchToTheForexAPI();
+    DataFromForexApi dataFrom = new DataFromForexApi();
+    JSONMapper mapper = new JSONMapper();
+    private double rate;
+
+    public double getExchangeRateToBeConverted(String date) {
+        setFetchToTheForexApi(date);
+        HashMap maps = (HashMap) dataFrom.getRates();
+        return (double) maps.get("PLN");
+    }
+
+    public double getExchangeRate(String date) {
+        setFetchToTheForexApi(date);
+        HashMap maps = (HashMap) dataFrom.getRates();
+        return roundTo2DecimalPlace((double) maps.get("PLN"));
+    }
+
+    public void setFetchToTheForexApi(String date) {
+        if (Objects.equals(date, null)) {
+            String fetchInfo = fetch.getRespondsWithLatestDate();
+            dataFrom = mapper.mapJsonToJava(fetchInfo);
+        } else {
+            String fetchInfo = fetch.getRespondsWithHistoricalDate(date);
+            dataFrom = mapper.mapJsonToJava(fetchInfo);
+        }
+    }
 
     public ExchangeRateDTO() {
+
     }
 
     public ExchangeRateDTO(String ticker, double exchangeAmount, double rate) {
         this.ticker = ticker;
         this.exchangeAmount = exchangeAmount;
         this.rate = rate;
+    }
+
+    public String getDate() {
+
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public double getExchangeAmount() {
@@ -43,16 +77,17 @@ public class ExchangeRateDTO {
     }
 
     public void setRate(double rate) {
+
         this.rate = rate;
     }
 
-    public double convertedCurrency(double exchangeAmount) {
+    public double convertedCurrency(double exchangeAmount, String date) {
         if (exchangeAmount <= 0) {
             System.out.println("You have entered an incorrect amount. The amount cannot be negative or zero.");
             return 0;
         } else {
-            double result = roundTo2DecimalPlace(exchangeAmount * rate); //exchangeAmount
-            return result;
+            double result = exchangeAmount * getExchangeRateToBeConverted(date); //exchangeAmount
+            return roundTo2DecimalPlace(result);
         }
     }
 
@@ -62,7 +97,7 @@ public class ExchangeRateDTO {
 
     @Override
     public String toString() {
-        return "ExchangeRateDTO{" +
+        return "ExchangeRate{" +
                 "ticker='" + ticker + '\'' +
                 ", exchangeAmount=" + exchangeAmount +
                 ", rate=" + rate +
@@ -74,11 +109,11 @@ public class ExchangeRateDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ExchangeRateDTO that = (ExchangeRateDTO) o;
-        return Double.compare(exchangeAmount, that.exchangeAmount) == 0 && Double.compare(rate, that.rate) == 0 && Objects.equals(ticker, that.ticker);
+        return Double.compare(exchangeAmount, that.exchangeAmount) == 0 && Double.compare(rate, that.rate) == 0 && Objects.equals(ticker, that.ticker) && Objects.equals(date, that.date) && Objects.equals(fetch, that.fetch) && Objects.equals(dataFrom, that.dataFrom) && Objects.equals(mapper, that.mapper);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticker, exchangeAmount, rate);
+        return Objects.hash(ticker, date, exchangeAmount, rate);
     }
 }
