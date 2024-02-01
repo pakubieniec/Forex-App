@@ -11,14 +11,13 @@ import java.util.List;
 
 
 public class SaveToCsvFile {
-    JSONMapper mapper = new JSONMapper();
-    DataFromForexApi dataFrom = new DataFromForexApi();
-    FetchToTheForexAPI fetch = new FetchToTheForexAPI();
-    ExchangeRate er = new ExchangeRate();
+    private final JSONMapper mapper = new JSONMapper();
+    private final FetchToTheForexAPI fetch = new FetchToTheForexAPI();
+    private final ExchangeRate er = new ExchangeRate();
+    private DataFromForexApi dataFrom = new DataFromForexApi();
 
     public void addDataToCSV(String output, double exchangeAmount, String date) {
         try {
-
             BufferedWriter outfile = new BufferedWriter(new FileWriter(output, true));
 
             CSVWriter writer = new CSVWriter(outfile, ';',

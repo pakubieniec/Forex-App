@@ -10,9 +10,9 @@ public class ExchangeRate {
     private String ticker;
     private String date;
     private double exchangeAmount;
-    FetchToTheForexAPI fetch = new FetchToTheForexAPI();
-    DataFromForexApi dataFrom = new DataFromForexApi();
-    JSONMapper mapper = new JSONMapper();
+    private FetchToTheForexAPI fetch = new FetchToTheForexAPI();
+    private DataFromForexApi dataFrom = new DataFromForexApi();
+    private JSONMapper mapper = new JSONMapper();
     private double rate;
 
     public double getExchangeRateToBeConverted(String date) {
@@ -48,7 +48,6 @@ public class ExchangeRate {
     }
 
     public String getDate() {
-
         return date;
     }
 
@@ -77,7 +76,6 @@ public class ExchangeRate {
     }
 
     public void setRate(double rate) {
-
         this.rate = rate;
     }
 
@@ -91,7 +89,7 @@ public class ExchangeRate {
         }
     }
 
-    public static double roundTo2DecimalPlace(double value) {
+    private double roundTo2DecimalPlace(double value) {
         return Math.round(value * 100.0) / 100.0;
     }
 
