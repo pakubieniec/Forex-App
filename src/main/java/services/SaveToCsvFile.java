@@ -13,7 +13,7 @@ import java.util.List;
 public class SaveToCsvFile {
     private final JSONMapper mapper = new JSONMapper();
     private final FetchToTheForexAPI fetch = new FetchToTheForexAPI();
-    private final ExchangeRate er = new ExchangeRate();
+    private final CurrencyOperations currencyOperations = new CurrencyOperations();
     private DataFromForexApi dataFrom = new DataFromForexApi();
 
     public void addDataToCSV(String output, double exchangeAmount, String date) {
@@ -36,7 +36,7 @@ public class SaveToCsvFile {
             String d = dataFrom.getDate();
             String b = dataFrom.getBase();
 
-            String amount = String.valueOf(er.convertedCurrency(exchangeAmount, date));
+            String amount = String.valueOf(currencyOperations.convertedCurrency(exchangeAmount, date));
 
             data.add(new String[]{d, b, amount});
             writer.writeAll(data);

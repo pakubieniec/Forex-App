@@ -3,6 +3,7 @@ package util;
 import DataModel.DataFromForexApi;
 import DataModel.ExchangeRate;
 import Mappers.JSONMapper;
+import services.CurrencyOperations;
 import services.FetchToTheForexAPI;
 import services.SaveToCsvFile;
 
@@ -14,7 +15,7 @@ public class UserCommunicationUtil {
     private int day = 1;
     private final Scanner scanner = new Scanner(System.in);
     private final FetchToTheForexAPI fetch = new FetchToTheForexAPI();
-    private final ExchangeRate exchangeRate = new ExchangeRate();
+    private final CurrencyOperations currencyOperations = new CurrencyOperations();
     private final JSONMapper mapper = new JSONMapper();
     private final SaveToCsvFile saveToCsvFile = new SaveToCsvFile();
 
@@ -38,14 +39,14 @@ public class UserCommunicationUtil {
             switch (day) {
                 case 1 -> {
                     DataFromForexApi dataLatest = mapper.mapJsonToJava(fetch.getRespondsWithLatestDate());
-                    System.out.printf("Today: %s the %s is%5.2f. %n %n", dataLatest.getDate(), dataLatest.getBase(), exchangeRate.getExchangeRate(date));
+                    System.out.printf("Today: %s the %s is%5.2f. %n %n", dataLatest.getDate(), dataLatest.getBase(), currencyOperations.getExchangeRate(date));
                     askToChangeMoney();
                 }
                 case 2 -> {
                     System.out.println("Enter the date (YYYY-MM-DD): ");
                     date = scanner.nextLine();
                     DataFromForexApi dataHistorical = mapper.mapJsonToJava(fetch.getRespondsWithHistoricalDate(date));
-                    System.out.printf("%s the %s is%5.2f. %n %n", dataHistorical.getDate(), dataHistorical.getBase(), exchangeRate.getExchangeRate(date));
+                    System.out.printf("%s the %s is%5.2f. %n %n", dataHistorical.getDate(), dataHistorical.getBase(), currencyOperations.getExchangeRate(date));
                     askToChangeMoney();
                 }
                 default -> {
@@ -99,7 +100,7 @@ public class UserCommunicationUtil {
             boolean flag = true;
             while (flag) {
                 if (amount > 0) {
-                    System.out.printf("At this exchange rate you would get %5.2f zl. %n %n", exchangeRate.convertedCurrency(amount, date));
+                    System.out.printf("At this exchange rate you would get %5.2f zl. %n %n", currencyOperations.convertedCurrency(amount, date));
                     saveDataToCSV(amount);
                     printThanksForUseApp();
                     flag = false;

@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class ExchangeRateInfo {
-    private final FetchToTheForexAPI fetch = new FetchToTheForexAPI();
-    private final List<String> listDataFromForexApi = new ArrayList<>();
     private String date;
 
     public ExchangeRateInfo() {
@@ -18,10 +16,6 @@ public class ExchangeRateInfo {
         this.date = date;
     }
 
-    public List<String> getListDataFromForexApi() {
-        return listDataFromForexApi;
-    }
-
     public String getDate() {
         return date;
     }
@@ -29,33 +23,10 @@ public class ExchangeRateInfo {
     public void setDate(String date) {
         this.date = date;
     }
-
-    public void writeValueCurrencyExchangeToList() {
-        listDataFromForexApi.add(fetch.getRespondsWithLatestDate());
-    }
-
-    public void writeValueCurrencyExchangeToList(String date) {
-        listDataFromForexApi.add(fetch.getRespondsWithHistoricalDate(date));
-    }
-
     @Override
     public String toString() {
         return "ExchangeRateInfo{" +
-                ", listDataFromForexApi=" + listDataFromForexApi +
-                ", date='" + date + '\'' +
+                "date='" + date + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ExchangeRateInfo that = (ExchangeRateInfo) o;
-        return Objects.equals(listDataFromForexApi, that.listDataFromForexApi) && Objects.equals(date, that.date);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(listDataFromForexApi, date);
     }
 }
