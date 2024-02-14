@@ -2,6 +2,7 @@ package services;
 
 import Mappers.JSONMapper;
 import DataModel.DataFromForexApi;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -34,7 +35,6 @@ public class FetchToTheForexAPI {
                 .uri(URI.create("http://api.exchangeratesapi.io/v1/" + date + "?access_key=" + API_KEY + "&symbols=PLN"))
                 .GET()
                 .build();
-
         return getRespondsObj(request);
     }
 

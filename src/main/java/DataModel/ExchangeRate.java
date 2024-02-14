@@ -1,15 +1,18 @@
 package DataModel;
 
+import Mappers.JSONMapper;
+import services.FetchToTheForexAPI;
+
+import java.util.HashMap;
 import java.util.Objects;
 
 public class ExchangeRate {
     private String ticker;
     private String date;
     private double exchangeAmount;
-    private double rate = 4.2;
+    private double rate;
 
     public ExchangeRate() {
-
     }
 
     public ExchangeRate(String ticker, double exchangeAmount, double rate) {
@@ -48,20 +51,6 @@ public class ExchangeRate {
 
     public void setRate(double rate) {
         this.rate = rate;
-    }
-
-    public double convertedCurrency(double exchangeAmount) {
-        if (exchangeAmount <= 0) {
-            System.out.println("You have entered an incorrect amount. The amount cannot be negative or zero.");
-            return 0;
-        } else {
-            double result = roundTo2DecimalPlace(exchangeAmount * rate); //exchangeAmount
-            return result;
-        }
-    }
-
-    public static double roundTo2DecimalPlace(double value) {
-        return Math.round(value * 100.0) / 100.0;
     }
 
     @Override

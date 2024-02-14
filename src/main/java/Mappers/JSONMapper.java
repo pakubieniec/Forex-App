@@ -7,7 +7,6 @@ import DataModel.DataFromForexApi;
 
 public class JSONMapper {
     ObjectMapper objectMapper = new ObjectMapper();
-
     public DataFromForexApi mapJsonToJava(String json) {
         DataFromForexApi data;
         try {
